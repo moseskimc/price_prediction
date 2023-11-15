@@ -7,11 +7,12 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.preprocessing import MinMaxScaler
 
-from utils.eval_metrics import get_reg_metrics
+from utils.eval_metrics import get_reg_metrics, plot_model_coeffs
 
 from utils.data_processing import remove_na_rows, remove_outliers, \
-    convert_to_datetime, add_province, split_by_horizon
+    convert_to_datetime, add_province, split_by_horizon, normalize_columns
 
 
 if __name__ == "__main__":
@@ -79,6 +80,14 @@ if __name__ == "__main__":
     # first we split by month
     # since there are 3 months, we choose the last month as the test set
 
+    # first normalize numeric features
+    numeric_features = [
+        'Total Volume', 'Total Boxes', 'Small Boxes',
+        'Large Boxes', 'XLarge Boxes'
+    ]
+
+    normalize_columns(df_normal, numeric_features, MinMaxScaler())
+
     trainX, trainy, testX, testy = split_by_horizon(
         df_normal,
         features,
@@ -132,5 +141,13 @@ if __name__ == "__main__":
 
     # print
     print(evals)
+
+    # save model coeffs
+    plot_model_coeffs(
+        lr,
+        trainX,
+        save_dir
+    )
+
 
 ###############################################################################
