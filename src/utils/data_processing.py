@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 from typing import List
+from sklearn.preprocessing import MinMaxScaler
 
 
 def remove_na_rows(
@@ -137,3 +138,22 @@ def split_by_horizon(
     trainy, testy = df_train[label], df_test[label]
 
     return trainX, trainy, testX, testy
+
+
+def normalize_columns(
+    df: pd.DataFrame,
+    columns: list,
+    scaler: MinMaxScaler,
+):
+    """Normalize numeric columns using min-max scaler
+
+    Args:
+        df (pd.DataFrame): dataframe to scale columns from
+        columns (list): list of columns to scale
+        scaler (MinMaxScaler): scaler used to normalize col values
+    """
+
+    for column in columns:
+        df[column] = scaler.fit_transform(
+            np.array(df[column]).reshape(-1, 1)
+        )
