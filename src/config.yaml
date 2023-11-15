@@ -1,0 +1,10 @@
+# data
+data_directory: data/
+file_name: dataset.csv
+target_name: Price
+features: ['Total Volume', 'Total Boxes', 'Small Boxes',
+        'Large Boxes', 'XLarge Boxes', 'Region', 'Province']
+time_horizon: 3  # month
+
+# output
+save_dir: output
