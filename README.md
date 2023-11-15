@@ -76,7 +76,7 @@ There wasn't much correlation between numeric features (i.e. Total Volume, Total
 But we do observe fluctuations usually occur for lower total volume values (other numeric values such as total boxes show a similar behavior)
 
 
-Moreover, we examine any difference in means from region to region or province to province. One way to visualize the significance of t-tests is to plot boxplots as below.
+Moreover, we examine any difference in means from region to region and province to province. One way to visualize the significance of t-tests is to plot boxplots as below.
 
 ![](resources/boxplotbycity.png)
 
@@ -87,13 +87,20 @@ Moreover, we examine any difference in means from region to region or province t
 ## Results
 
 
-For model evaluation we chose the first two months to be our train set while the third month was our test set. Upon careful observation, one can see the prices come on a weekly basis.
+For model evaluation we chose the first two months to be our train set while the third month, our test set. Upon careful observation, one can see the prices come on a weekly basis.
 
 We trained three parametric models (linear regression, lasso, and ridge) and two non-parametric models (knearest and decision tree). As expected, the non-paramtric models overfit the data while the linear parametric models generalized much better with the linear regression model performing the best.
 
 
-            lr                  lasso               ridge               dt              knn          
-    metric  train     test      train     test      train     test      train test      train     test                                                                              
-    mse     0.023168  0.023680  0.049156  0.046662  0.023397  0.023691  0.0   0.033231  0.008882  0.037412
-    mae     0.105481  0.118599  0.177451  0.172974  0.107016  0.118628  0.0   0.133224  0.066215  0.143131
-    mape    0.065531  0.075321  0.112266  0.109558  0.066583  0.075350  0.0   0.089082  0.041974  0.090252
+                lr                  lasso               ridge               dt              knn          
+                train     test      train     test      train     test      train test      train     test
+        metric                                                                                                
+        mse     0.023307  0.023664  0.049532  0.047414  0.023659  0.023559  0.0   0.031771  0.004156  0.016890
+        mae     0.105841  0.118169  0.178126  0.174618  0.107968  0.118392  0.0   0.129393  0.045280  0.095070
+        mape    0.065787  0.074955  0.112790  0.110568  0.067164  0.075171  0.0   0.085764  0.028411  0.060617
+
+
+The top-15 most significant coefficients in our linear model are shown in the plot below.
+
+
+![](resources/model_coeffs.png)
