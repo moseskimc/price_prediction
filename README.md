@@ -73,8 +73,10 @@ There wasn't much correlation between numeric features (i.e. Total Volume, Total
 
 ![](resources/pricetotalboxcorr.png)
 
+But we do observe fluctuations usually occur for lower total volume values (other numeric values such as total boxes show a similar behavior)
 
-Instead, we focused on examining any difference in means from region to region or province to province. One way to visualize the significance of t-tests is to plot boxplots as below.
+
+Moreover, we examine any difference in means from region to region or province to province. One way to visualize the significance of t-tests is to plot boxplots as below.
 
 ![](resources/boxplotbycity.png)
 
