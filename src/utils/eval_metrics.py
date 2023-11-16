@@ -31,6 +31,7 @@ def plot_model_coeffs(
     model: LinearRegression,
     X_train: pd.DataFrame,
     save_dir: str,
+    save: bool = True,
     top_k: int = 15
 ):
     """Save top_k significant linear regression model coefficients
@@ -53,4 +54,5 @@ def plot_model_coeffs(
     plt.axvline(x=0, color=".5")
     plt.subplots_adjust(left=0.2)
 
-    plt.savefig(f"{save_dir}/model_coeffs.png")
+    if save:
+        plt.savefig(f"{save_dir}/model_coeffs.png")
