@@ -103,3 +103,18 @@ The top-15 most significant coefficients in our linear model are shown in the pl
 
 
 ![](resources/model_coeffs.png)
+
+
+The MSE for our linear regression model by province are given below. There seems to be much more variation in Gyeongi, NOrth Gyeongsang, North Chungcheon, and Jeju compared to other provinces. As we saw earlier in the boxplots, Gyeongi, North Gyeongsangm and North Chungcheong have a wide interquartile range while Jeju has two data points outside its IQ range.
+
+| Province | MSE |
+|-----------------|------|
+|North Jeolla     |    0.008457
+|South Jeolla     |    0.010541
+|Gangwon          |    0.012862
+|South Gyeongsang |    0.014547
+|South Chungcheong|    0.021485
+|Gyeonggi         |    0.026836
+|North Gyeongsang |    0.030001
+|North Chungcheong|    0.049068
+|Jeju             |    0.066031
