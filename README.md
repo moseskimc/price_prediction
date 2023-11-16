@@ -19,11 +19,11 @@ To run the notebooks and script locally, make sure to create your environment an
 ## Scripts
 
 
-### `train.py`
+### `main.py`
 
 From the root directory, run
 
-    PYTHONPATH=./ python3 src/train.py
+    PYTHONPATH=./ python3 src/main.py
 
 There will be some stdout as well as files saved inside `output/` once the script is run.
 
