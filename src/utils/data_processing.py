@@ -1,3 +1,6 @@
+import itertools
+import random
+
 import pandas as pd
 import numpy as np
 
@@ -157,3 +160,57 @@ def normalize_columns(
         df[column] = scaler.fit_transform(
             np.array(df[column]).reshape(-1, 1)
         )
+
+
+def generate_random_data(
+    months: list = [1, 2, 3],
+    days: dict = {
+        1: ['28', '21', '14', '7'],
+        2: ['25', '18', '11', '4'],
+        3: ['25', '18', '11', '4']
+    },
+    years: list = [2018]
+):
+    """Return random data based on data set columns.
+
+    Args:
+        months (list, optional): month list to sample. Defaults to [1, 2, 3].
+        days (_type_, optional): month days to sample from.
+                                Defaults to { 1: ['28', '21', '14', '7'],
+                                              2: ['25', '18', '11', '4'],
+                                              3: ['25', '18', '11', '4'] }.
+        years (list, optional): list of years to sample. Defaults to [2018].
+    """
+
+    rand_data = {}
+    dates = []
+    for month in months:
+        month_days = days[month]
+
+        random_days = random.choices(month_days, k=200)
+        for y, m, d in itertools.product(years, [str(month)], random_days):
+            dates.append(f"{m}/{d}/{y}")
+
+    rand_data['Date'] = dates
+
+    no_rows = len(dates)    
+    for col in [
+        'Total Volume', 'Total Boxes', 'Small Boxes',
+        'Large Boxes', 'XLarge Boxes'
+    ]:
+        rand_data[col] = random.sample(range(1, 20000), no_rows)
+
+    rand_data['Price'] = np.abs(np.random.normal(1.5, 0.5, no_rows))
+
+    rand_data['Region'] = random.choices(
+        ['Seoul', 'Incheon', 'deagu', 'Anyang', 'Ulsan', 'Busan', 'Daejon',
+         'Jeju', 'Gwangju', 'Gangeung', 'Pyeongchang', 'Andong', 'Asan',
+         'Boryeong', 'Chungju', 'Geoje', 'Gimpo', 'Gongju', 'Gunpo',
+         'Hanam', 'Jeonju', 'Suwon', 'Taebaek', 'Pyeongtaek', 'Yeoju',
+         'Wonju', 'Sangju', 'Miryang', 'Suncheon', 'Iksan', 'Namwon',
+         'Siheung', 'Tongyeong', 'Yangju', 'Yangsan', 'Donghae', 'Gyeongju',
+         'Gyeryong', 'Gimje', 'Gwangmyeong', 'Icheon'],
+        k=no_rows
+    )
+
+    return pd.DataFrame(rand_data)

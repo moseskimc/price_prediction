@@ -1,6 +1,6 @@
 import os
 import yaml
-
+import argparse
 
 import pandas as pd
 
@@ -12,10 +12,17 @@ from sklearn.preprocessing import MinMaxScaler
 from utils.eval_metrics import get_reg_metrics, plot_model_coeffs
 
 from utils.data_processing import remove_na_rows, remove_outliers, \
-    convert_to_datetime, add_province, split_by_horizon, normalize_columns
+    convert_to_datetime, add_province, split_by_horizon, normalize_columns, \
+    generate_random_data
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-r', '--random_data', action='store_true')
+parser.add_argument('-s', '--save', action='store_false')
 
 
 if __name__ == "__main__":
+
+    pargs = parser.parse_args()
 
     with open('src/config.yaml') as file:
         config = yaml.safe_load(file)
@@ -28,9 +35,12 @@ if __name__ == "__main__":
     features = config['features']  # feature columns
     label = config['target_name']  # target label
     save_dir = config['save_dir']  # dir to save output
-    save = config['save']          # whether to save output
+    save = pargs.save              # whether to save output
 
-    df = pd.read_csv(file_path)
+    if pargs.random_data:  # for github workflow
+        df = generate_random_data()
+    else:
+        df = pd.read_csv(file_path)
 
 ######################################PROCESSING###############################
 

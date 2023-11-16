@@ -7,5 +7,4 @@ features: ['Total Volume', 'Total Boxes', 'Small Boxes',
 time_horizon: 3  # month
 
 # output
-save: false
 save_dir: output
