@@ -1,5 +1,5 @@
 # price_prediction
-
+<img src="https://github.com/moseskimc/price_prediction/actions/workflows/ci.yml/badge.svg">
 
 
 ## Introduction
