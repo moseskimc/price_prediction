@@ -184,16 +184,33 @@ def generate_random_data(
 
     rand_data = {}
     dates = []
+    regions = []
+
+    sample_regions = ['Seoul', 'Incheon', 'deagu', 'Anyang', 'Ulsan', 'Busan',
+                      'Daejon', 'Jeju', 'Gwangju', 'Gangeung', 'Pyeongchang',
+                      'Andong', 'Asan', 'Boryeong', 'Chungju', 'Geoje',
+                      'Gimpo', 'Gongju', 'Gunpo', 'Hanam', 'Jeonju', 'Suwon',
+                      'Taebaek', 'Pyeongtaek', 'Yeoju', 'Wonju', 'Sangju',
+                      'Miryang', 'Suncheon', 'Iksan', 'Namwon', 'Siheung',
+                      'Tongyeong', 'Yangju', 'Yangsan', 'Donghae', 'Gyeongju',
+                      'Gyeryong', 'Gimje', 'Gwangmyeong', 'Icheon']
+
+    no_days = 200
+
     for month in months:
         month_days = days[month]
 
-        random_days = random.choices(month_days, k=200)
-        for y, m, d in itertools.product(years, [str(month)], random_days):
+        random_days = random.choices(month_days, k=no_days)
+        month_dates = itertools.product(years, [str(month)], random_days)
+        for y, m, d in month_dates:
             dates.append(f"{m}/{d}/{y}")
 
-    rand_data['Date'] = dates
+        regions += random.choices(sample_regions, k=no_days)
 
-    no_rows = len(dates)    
+    rand_data['Date'] = dates
+    rand_data['Region'] = regions
+    no_rows = len(dates)
+
     for col in [
         'Total Volume', 'Total Boxes', 'Small Boxes',
         'Large Boxes', 'XLarge Boxes'
@@ -202,15 +219,7 @@ def generate_random_data(
 
     rand_data['Price'] = np.abs(np.random.normal(1.5, 0.5, no_rows))
 
-    rand_data['Region'] = random.choices(
-        ['Seoul', 'Incheon', 'deagu', 'Anyang', 'Ulsan', 'Busan', 'Daejon',
-         'Jeju', 'Gwangju', 'Gangeung', 'Pyeongchang', 'Andong', 'Asan',
-         'Boryeong', 'Chungju', 'Geoje', 'Gimpo', 'Gongju', 'Gunpo',
-         'Hanam', 'Jeonju', 'Suwon', 'Taebaek', 'Pyeongtaek', 'Yeoju',
-         'Wonju', 'Sangju', 'Miryang', 'Suncheon', 'Iksan', 'Namwon',
-         'Siheung', 'Tongyeong', 'Yangju', 'Yangsan', 'Donghae', 'Gyeongju',
-         'Gyeryong', 'Gimje', 'Gwangmyeong', 'Icheon'],
-        k=no_rows
-    )
+    for key in rand_data:
+        print(f"Key {key}: {len(rand_data[key])}")
 
     return pd.DataFrame(rand_data)
