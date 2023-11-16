@@ -196,7 +196,7 @@ def generate_random_data(
                       'Gyeryong', 'Gimje', 'Gwangmyeong', 'Icheon']
 
     no_days = 200
-
+    len_sample_regions = len(sample_regions)
     for month in months:
         month_days = days[month]
 
@@ -205,7 +205,12 @@ def generate_random_data(
         for y, m, d in month_dates:
             dates.append(f"{m}/{d}/{y}")
 
-        regions += random.choices(sample_regions, k=no_days)
+        # to make sure we have features in both train and test
+        # if splitting by month
+        regions += sample_regions
+        # add the remaining days
+        regions += random.choices(sample_regions,
+                                  k=no_days - len_sample_regions)
 
     rand_data['Date'] = dates
     rand_data['Region'] = regions
