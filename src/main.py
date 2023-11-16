@@ -28,6 +28,7 @@ if __name__ == "__main__":
     features = config['features']  # feature columns
     label = config['target_name']  # target label
     save_dir = config['save_dir']  # dir to save output
+    save = config['save']          # whether to save output
 
     df = pd.read_csv(file_path)
 
@@ -120,7 +121,9 @@ if __name__ == "__main__":
     # save
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
-    evals.to_csv(os.path.join(save_dir, "model_evals.csv"))
+
+    if save:
+        evals.to_csv(os.path.join(save_dir, "model_evals.csv"))
 
     # print
     print(evals)
@@ -129,7 +132,8 @@ if __name__ == "__main__":
     plot_model_coeffs(
         lr,
         trainX,
-        save_dir
+        save_dir,
+        save
     )
 
     # linear regression performance by region and province
@@ -156,7 +160,8 @@ if __name__ == "__main__":
         set_index('metric')
 
     # save
-    lr_metrics_df.to_csv(os.path.join(save_dir, "lr_metrics.csv"))
+    if save:
+        lr_metrics_df.to_csv(os.path.join(save_dir, "lr_metrics.csv"))
     # stdout
     print(lr_metrics_df)
     # sort provinces by ascending MSE metric
