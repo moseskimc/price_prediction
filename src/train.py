@@ -132,5 +132,34 @@ if __name__ == "__main__":
         save_dir
     )
 
+    # linear regression performance by region and province
+    provinces = [col for col in testX.columns if col.startswith('Province')]
+    lr_eval_metrics_by_province = {}
+    # set metric column
+    lr_eval_metrics_by_province["metric"] = [
+        "MSE",
+        "MAE",
+        "MAPE",
+    ]
+    for province in provinces:
+        mask = testX[province] == True
+        testX_province = testX[mask]
+        testy_province = testy[mask]
+
+        pred = lr.predict(testX_province)
+        gt = testy_province
+
+        province_name = province.split('_')[1]
+        lr_eval_metrics_by_province[province_name] = get_reg_metrics(pred, gt)
+
+    lr_metrics_df = pd.DataFrame(lr_eval_metrics_by_province).\
+        set_index('metric')
+
+    # save
+    lr_metrics_df.to_csv(os.path.join(save_dir, "lr_metrics.csv"))
+    # stdout
+    print(lr_metrics_df)
+    # sort provinces by ascending MSE metric
+    print(lr_metrics_df.loc['MSE'].sort_values())
 
 ###############################################################################
