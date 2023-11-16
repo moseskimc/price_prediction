@@ -39,7 +39,7 @@ And, second, run the script
 
 ## Analysis
 
-The presence of a few outliers skewed the distribution of price values. Binning by intervals of 500, we get:
+The presence of outliers skewed the distribution of price values. Binning by intervals of 500, we have the following count:
 
 |bin | count |
 |---------------|------|
@@ -52,7 +52,7 @@ The presence of a few outliers skewed the distribution of price values. Binning 
 |(3001.0, 3501.0]| 1 |
  
 
-Once the outlier is removed, we have the following bins.
+Once the outlier is removed, we have check the bins once more, this time with a smaller interval of 32.
 
 |bin | count |
 |---------------|------|
@@ -64,7 +64,7 @@ Once the outlier is removed, we have the following bins.
 |(161.0, 193.0] |     0
 |(193.0, 225.0]  |    1
 
-Once we remove it, we we have following distribution of price values that resemble a normal distribution.
+When the second outlier is removed, we have the following distribution of price values that resemble a normal distribution.
 
 ![](resources/normal.png)
 
@@ -74,7 +74,6 @@ There wasn't much correlation between numeric features (i.e. Total Volume, Total
 ![](resources/pricetotalboxcorr.png)
 
 But we do observe fluctuations usually occur for lower total volume values (other numeric values such as total boxes show a similar behavior)
-
 
 Moreover, we examine any difference in means from region to region and province to province. One way to visualize the significance of t-tests is to plot boxplots as below.
 
