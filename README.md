@@ -41,7 +41,7 @@ And, second, run the script
 
 The presence of a few outliers skewed the distribution of price values. Binning by intervals of 500, we get:
 
-|bin | frequency |
+|bin | count |
 |---------------|------|
 |(0.999, 501.0] | 643 |
 |(501.0, 1001.0] | 0 |
@@ -54,7 +54,7 @@ The presence of a few outliers skewed the distribution of price values. Binning 
 
 Once the outlier is removed, we have the following bins.
 
-|bin | frequency |
+|bin | count |
 |---------------|------|
 |(0.999, 33.0]  |   642
 |(33.0, 65.0]   |     0
