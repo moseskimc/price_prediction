@@ -58,23 +58,6 @@ if __name__ == "__main__":
 ###############################################################################
 
 
-    # # go through 3 more iterations
-    # # stop early if there's nothing to remove
-    # run_iterations = 0
-    # for _ in range(3):
-    #     prev_len = df_nona_noout.shape[0]
-
-    #     df_nona_noout = remove_outliers(
-    #         df_nona_noout, label
-    #     )
-
-    #     if prev_len == df_nona_noout.shape[0]:
-    #         break
-    #     run_iterations += 1
-
-    # print(f"Run iterations: {run_iterations}")
-
-
 ######################################TRAIN####################################
 
     # first we split by month
